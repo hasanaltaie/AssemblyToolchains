@@ -44,7 +44,7 @@ while [[ $# -gt 0 ]]; do
                         VERBOSE=True
                         shift # past argument
                         ;;
-                -32|--x84-64) ///64-bit is always true
+                -32|--x84-64) 
                         BITS=False
                         shift # past argument
                         ;;
