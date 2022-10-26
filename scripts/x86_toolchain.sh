@@ -15,7 +15,7 @@ if [ $# -lt 1 ]; then
         echo "-b | --break <break point>    Add breakpoint after running gdb. Default is _start."
         echo "-r | --run                    Run program in gdb automatically. Same as run command inside gdb env."
         echo "-q | --qemu                   Run executable in QEMU emulator. This will execute the program."
-        echo "-32| --x86-64                 Compile for 32bit (x86-32) system."
+        echo "-32| --x86-32                 Compile for 32bit (x86-32) system."
         echo "-o | --output <filename>      Output filename."
 
         exit 1
@@ -44,7 +44,7 @@ while [[ $# -gt 0 ]]; do
                         VERBOSE=True
                         shift # past argument
                         ;;
-                -32|--x84-64) 
+                -32|--x86-32) 
                         BITS=False
                         shift # past argument
                         ;;
