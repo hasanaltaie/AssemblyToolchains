@@ -28,6 +28,7 @@ POSITIONAL_ARGS=()
 GDB=False
 OUTPUT_FILE=""
 VERBOSE=False
+BITS=False # variable for ARM64
 QEMU=False
 PORT="12222"
 BREAK="main"
@@ -48,6 +49,10 @@ while [[ $# -gt 0 ]]; do
                         ;;
                 -v|--verbose)
                         VERBOSE=True
+                        shift # past argument
+                        ;;
+                -64|--arm-64)
+                        BITS=True
                         shift # past argument
                         ;;
                 -q|--qemu)
@@ -129,6 +134,14 @@ if [ "$VERBOSE" == "True" ]; then
 
 fi
 
+if [ "$BITS" == "True"]; then   # if condition for compiling ARM64 assembly
+
+        echo "Compiling ARM64..."
+        aarch64-linux-gnu-as $OUTPUT_FILE.s -o $OUTPUT_FILE.on
+        aarch64-linux-gnu-gcc $OUTPUT_FILE.o -o $OUTPUT_FILE.elif -nostdlib -static
+        qemu-aarch64 ./$OUTPUT_FILE.elf
+
+fi
 
 if [ "$QEMU" == "True" ] && [ "$GDB" == "False" ]; then
         # Only run QEMU
